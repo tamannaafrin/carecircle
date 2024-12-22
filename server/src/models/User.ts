@@ -17,12 +17,16 @@ const UserSchema = new mongoose.Schema({
 	userType: {
 		type: String,
 		required: true,
-		enum: ["admin", "user"],
+		enum: ["admin", "user", "companion"],
 		default: "user",
 	},
 	createdAt: {
 		type: Date,
 		default: Date.now,
+	},
+	isBanned: {
+		type: Boolean,
+		default: false,
 	},
 });
 

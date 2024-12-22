@@ -1,6 +1,19 @@
 import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
-import { signup, login, getUserById } from "./controllers/userController";
+import {
+	signup,
+	login,
+	getUserById,
+	deleteUser,
+	toggleBanUser,
+	getAllUsers,
+} from "./controllers/userController";
+import {
+	addNewGroup,
+	deleteGroup,
+	editGroup,
+	getAllGroups,
+} from "./controllers/groupController";
 import connectDB from "./config/db";
 import cors from "cors";
 
@@ -48,6 +61,14 @@ const startServer = async () => {
 	app.post("/api/signup", signup);
 	app.post("/api/login", login);
 	app.get("/api/user/:id", getUserById);
+	app.delete("/api/user/:id", deleteUser);
+	app.put("/api/user/:id", toggleBanUser);
+	app.get("/api/users", getAllUsers);
+
+	app.post("/api/group", addNewGroup);
+	app.put("/api/group", editGroup);
+	app.delete("/api/group/:id", deleteGroup);
+	app.get("/api/groups", getAllGroups);
 
 	const PORT = process.env.PORT || 5000;
 	app.listen(PORT, () => console.log(`Server Working`));
